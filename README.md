@@ -27,7 +27,7 @@ Plantilla unificada para trabajos académicos en LaTeX compatible con **Alegreya
 
 ```bash
 # 1. Clona o descarga la plantilla
-git clone <tu-repositorio> nuevo-proyecto
+git clone https://github.com/TakedaTakeishi/plantilla-latex-escolar nuevo-proyecto
 
 # 2. Abre la carpeta en VS Code
 code nuevo-proyecto
@@ -74,6 +74,30 @@ Crea archivos `.tex` en `capitulos/` y descoméntalos en `main.tex`:
 ### 4. Bibliografía
 
 Agrega tus referencias en `referencias.bib` y cítalas con `\cite{clave}`.
+
+## Estructura del proyecto
+
+```
+📁 plantilla-latex-escolar/
+├── 📁 .vscode/           → Configuración LaTeX Workshop (no tocar)
+├── 📁 capitulos/         → Portada y tus capítulos (editar aquí)
+│   ├── portada.tex        → Datos del proyecto + diseño
+│   └── ejemplo.tex        → Capítulo de referencia
+├── 📁 common/             → Archivos estáticos (no tocar)
+│   ├── anexos.tex         → Anexos del documento
+│   ├── bibliografia.tex   → Formato bibliográfico
+│   └── indices.tex        → Generación de índices
+├── 📁 config/             → Configuración técnica
+│   ├── proyecto.tex       → Fuente, tamaños (editar)
+│   └── configuracion.tex  → Paquetes y estilos (no tocar)
+├── 📁 imagenes/           → Imágenes del proyecto
+│   └── 📁 logos/          → Logos institucionales
+├── 📁 build/              → Compilación (no se sube)
+├── .gitignore             → Exclusiones de control de versiones
+├── main.tex               → Documento principal
+└── referencias.bib        → Referencias bibliográficas
+```
+
 
 ## Documentos grandes (varios capítulos)
 
@@ -239,28 +263,6 @@ La plantilla usa un selector en `config/proyecto.tex` que carga la fuente corres
 > [!TIP]
 > Con Alegreya los títulos de sección usan **Alegreya SC** (versalitas); con Times New Roman se usa negrita estándar. Ambos se ven profesionales.
 
-## Estructura del proyecto
-
-```
-📁 plantilla-latex-escolar/
-├── 📁 .vscode/           → Configuración LaTeX Workshop (no tocar)
-├── 📁 capitulos/         → Portada y tus capítulos (editar aquí)
-│   ├── portada.tex        → Datos del proyecto + diseño
-│   └── ejemplo.tex        → Capítulo de referencia
-├── 📁 common/             → Archivos estáticos (no tocar)
-│   ├── anexos.tex         → Anexos del documento
-│   ├── bibliografia.tex   → Formato bibliográfico
-│   └── indices.tex        → Generación de índices
-├── 📁 config/             → Configuración técnica
-│   ├── proyecto.tex       → Fuente, tamaños (editar)
-│   └── configuracion.tex  → Paquetes y estilos (no tocar)
-├── 📁 imagenes/           → Imágenes del proyecto
-│   └── 📁 logos/          → Logos institucionales
-├── 📁 build/              → Compilación (no se sube)
-├── .gitignore             → Exclusiones de control de versiones
-├── main.tex               → Documento principal
-└── referencias.bib        → Referencias bibliográficas
-```
 
 ## Compilación
 

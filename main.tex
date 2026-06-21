@@ -1,0 +1,67 @@
+% ==========================================
+% PLANTILLA LATEX — DOCUMENTOS ACADÉMICOS
+% ==========================================
+%
+% CÓMO USAR ESTA PLANTILLA:
+%   1. Elige la fuente en  config/proyecto.tex
+%   2. Edita  capitulos/portada.tex   con los datos de tu proyecto
+%   3. Crea tus capítulos en  capitulos/
+%   4. Descomenta los \input que necesites abajo
+%   5. Compila:  latexmk -pdf -outdir=build main.tex
+%
+% ESTRUCTURA DE CARPETAS:
+%   config/       → Configuración técnica (fuente, tamaños)
+%   common/       → Archivos estáticos de la plantilla
+%   capitulos/    → Portada y tus capítulos (editar aquí)
+%   imagenes/     → Imágenes (logos en imagenes/logos/)
+%   build/        → Salida de compilación (se genera sola, no se sube)
+%
+% TIP: Si algo no compila, limpia build/ y reintenta:
+%      latexmk -C -outdir=build ; latexmk -pdf -outdir=build main.tex
+%
+% ==========================================
+
+\documentclass[11pt, letterpaper]{report}
+
+% --- Configuración técnica (fuente, tamaños) ---
+\input{config/proyecto}
+
+% --- Paquetes y estilos (no tocar) ---
+\input{config/configuracion}
+
+% ==========================================
+\begin{document}
+% ==========================================
+
+% --- Portada ---
+\pagenumbering{gobble}
+\input{capitulos/portada}
+
+% --- Resumen ---
+% \input{capitulos/00_resumen}
+
+% --- Índices ---
+\input{common/indices}
+
+% --- Contenido principal ---
+\pagenumbering{arabic}
+
+% TIP: Descomenta y agrega los capítulos que necesites.
+% \input{capitulos/introduccion}
+% \input{capitulos/marco_teorico}
+% \input{capitulos/desarrollo}
+% \input{capitulos/conclusiones}
+
+% Capítulo de ejemplo (eliminar cuando ya no lo necesites)
+\input{capitulos/ejemplo}
+
+% --- Bibliografía ---
+\nocite{*}
+\input{common/bibliografia}
+
+% --- Anexos ---
+% \input{common/anexos}
+
+% ==========================================
+\end{document}
+% ==========================================

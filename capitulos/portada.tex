@@ -1,0 +1,95 @@
+% ==========================================
+% PORTADA — EDITAR PARA CADA PROYECTO
+% ==========================================
+%
+% Edita los datos marcados con (*).
+% La fuente se elige en: config/proyecto.tex
+% ==========================================
+
+% ==========================================
+% DATOS DEL PROYECTO (*)
+% ==========================================
+
+\newcommand{\titulo}{Título del proyecto}
+\newcommand{\subtitulo}{Subtítulo o descripción corta}
+\newcommand{\materia}{Nombre de la materia}
+\newcommand{\profesor}{Nombre del profesor}
+\newcommand{\fechaEntrega}{\today}
+
+\newcommand{\institucion}{Instituto Politécnico Nacional}
+\newcommand{\escuela}{Escuela Superior de Cómputo}
+\newcommand{\siglasEscuela}{ESCOM}
+\newcommand{\carrera}{Ingeniería en Inteligencia Artificial}
+\newcommand{\grupo}{XBV1}
+\newcommand{\lugar}{Ciudad de México}
+
+\newcommand{\listaAutores}{
+    Apellido1 Nombre1 \\
+    Apellido2 Nombre2
+}
+
+\newcommand{\logoIzquierdo}{imagenes/logos/ipn_logo.png}
+\newcommand{\logoDerecho}{imagenes/logos/escom_logo.png}
+
+% ==========================================
+% DISEÑO DE LA PORTADA
+% ==========================================
+
+\begin{titlepage}
+    \newgeometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+    \centering
+
+    \begin{minipage}{0.18\textwidth}
+        \centering
+        \ifx\logoIzquierdo\empty\else
+            \includegraphics[width=0.7\textwidth]{\logoIzquierdo}
+        \fi
+    \end{minipage}%
+    \begin{minipage}{0.64\textwidth}
+        \centering
+        {\AlegreyaSC\fontsize{21pt}{28pt}\selectfont\bfseries \institucion}\\[0.4cm]
+        {\AlegreyaSC\fontsize{19pt}{26pt}\selectfont\bfseries \escuela}\\[0.35cm]
+        {\AlegreyaSC\fontsize{17pt}{19pt}\selectfont\bfseries \siglasEscuela}
+    \end{minipage}%
+    \begin{minipage}{0.18\textwidth}
+        \centering
+        \ifx\logoDerecho\empty\else
+            \includegraphics[width=\textwidth]{\logoDerecho}
+        \fi
+    \end{minipage}
+
+    \vspace{1.3cm}
+
+    {\AlegreyaSC\LARGE \carrera}\\[1cm]
+    {\AlegreyaSC\Large \materia}\\[1.5cm]
+
+    \rule{3cm}{2pt}\\[1cm]
+
+    {\fontsize{28pt}{34pt}\selectfont\itshape \titulo}\\[0.5cm]
+
+    \ifx\subtitulo\empty\else
+        {\Large\itshape \subtitulo}\\[0.5cm]
+    \fi
+
+    \vspace{1.5cm}
+
+    {\Large\textbf{INTEGRANTES}}\\[0.8cm]
+    \begin{center}
+        \large
+        \begin{tabular}{c}
+            \listaAutores
+        \end{tabular}
+    \end{center}
+
+    \ifx\profesor\empty\else
+        \vspace{1cm}
+        {\Large\textbf{Profesor:} \profesor}\\[0.5cm]
+    \fi
+
+    \vspace{\fill}
+
+    {\large\textbf{Grupo:} \grupo}\\[0.5cm]
+    {\large \lugar\ a \fechaEntrega}
+
+    \restoregeometry
+\end{titlepage}

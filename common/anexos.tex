@@ -1,0 +1,109 @@
+% ==========================================
+% ANEXOS — ARCHIVO AGREGADOR
+% ==========================================
+%
+% Este archivo es el punto de entrada de todos los anexos.
+% No pongas \chapter{} aquí directamente (a menos que sea
+% un anexo general). En su lugar, crea un anexo por capítulo
+% y agrégalo con \input{}.
+%
+% TIP: Cada capítulo puede tener su propio anexo en:
+%      capitulos/capitulo_X/anexos.tex
+%
+% TIP: Los anexos se numeran con letras (A, B, C...)
+%      automáticamente según el orden de los \input{}.
+% ==========================================
+
+\appendix
+\renewcommand{\appendixname}{Anexo}
+\renewcommand{\appendixpagename}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\addappheadtotoc
+\appendixpage
+
+% --- Agrega aquí los anexos de cada capítulo ---
+% Ejemplo:
+% \input{capitulos/capitulo_1/anexos}
+% \input{capitulos/capitulo_2/anexos}
+
+% ==========================================
+% REFERENCIA: Cómo incluir código fuente
+% ==========================================
+%
+% Para proyectos pequeños, puedes poner los anexos
+% directamente aquí. Para proyectos grandes, crea un
+% archivo por capítulo (ver sección "Documentos grandes"
+% en el README.md).
+%
+% A continuación se muestran las formas más comunes
+% de incluir código con listings.
+%
+% ==========================================
+%
+% --- FORMA 1: Desde archivo externo (recomendada) ---
+% Crea una carpeta codigos/ o programa/ en la raíz.
+%
+% \chapter{Código fuente}
+% \label{anexo:codigo}
+%
+% \lstinputlisting[language=C, style=mystyle,
+%   caption={Descripción del código. \propia{}},
+%   label={lst:etiqueta}]{codigos/mi_archivo.c}
+%
+%
+% --- FORMA 2: Con verificación de existencia ---
+% Si el archivo puede no estar presente, usa \IfFileExists
+% para evitar errores de compilación.
+%
+% \IfFileExists{programa/mi_programa.c}{
+%   \lstinputlisting[language=C, style=mystyle,
+%     caption={Código completo. \propia{}},
+%     label={lst:codigo}]{programa/mi_programa.c}
+% }{
+%   \noindent\textbf{Nota:} El archivo aún no está disponible.
+% }
+%
+%
+% --- FORMA 3: Código inline (fragmentos pequeños) ---
+% \begin{lstlisting}[language=Python, style=mystyle,
+%   caption={Fragmento de ejemplo},
+%   label={lst:ejemplo}]
+% def fibonacci(n):
+%     if n <= 1:
+%         return n
+%     return fibonacci(n - 1) + fibonacci(n - 2)
+% \end{lstlisting}
+%
+%
+% --- FORMA 4: Makefile ---
+% \lstinputlisting[language=make, style=mystyle,
+%   caption={Makefile del proyecto. \propia{}},
+%   label={lst:makefile}]{codigos/Makefile}
+%
+%
+% --- FORMA 5: Archivos de cabecera (.h) ---
+% \lstinputlisting[language=C, style=mystyle,
+%   caption={Archivo de cabecera. \propia{}},
+%   label={lst:header}]{programa/common.h}
+%
+%
+% ==========================================
+% BUENAS PRÁCTICAS
+% ==========================================
+%
+% 1. Usa \lstinputlisting para código que compila.
+%    Así el PDF siempre refleja el código real.
+%
+% 2. Usa \IfFileExists para que la compilación no
+%    falle si falta un archivo.
+%
+% 3. Pon siempre caption y label para referenciar
+%    los listados desde el texto:
+%    "En el Listado~\ref{lst:etiqueta} se muestra..."
+%
+% 4. Usa \propia{} al final del caption para agregar
+%    "Fuente: Elaboración propia."
+%
+% 5. Para proyectos con varios capítulos, crea un
+%    anexos.tex por capítulo y agrégalo arriba con
+%    \input{}.

@@ -226,7 +226,6 @@ En este anexo se presenta el código completo del capítulo 1.
 ```latex
 \appendix
 \renewcommand{\appendixname}{Anexo}
-\renewcommand{\appendixpagename}{Anexos}
 \renewcommand{\appendixtocname}{Anexos}
 \addappheadtotoc
 \appendixpage
@@ -276,10 +275,14 @@ Con LaTeX Workshop instalado, la plantilla ya incluye las recetas en `.vscode/se
 ### Desde terminal
 
 ```bash
-# Compilación rápida (sin bibliografía)
+# Compilación rápida (sin bibliografía, una pasada de xelatex)
 latexmk -pdf -outdir=build main.tex
 
-# Si agregaste citas, usa la receta completa:
+# Receta completa (resuelve referencias cruzadas y bibliografía):
+# Nota: Algunas configuraciones de latexmk solo ejecutan xelatex
+# una vez, lo que deja las referencias como "??". Si pasa eso,
+# usa la receta manual:
+
 xelatex -output-directory=build main.tex
 biber --output-directory build main
 xelatex -output-directory=build main.tex
@@ -310,16 +313,24 @@ Sí. En `config/configuracion.tex`, agrega un nuevo `\newif` y su configuración
 
 ### ¿Cómo agrego un anexo?
 
-Descomenta `\input{common/anexos}` en `main.tex` y edita `common/anexos.tex`. Ya incluye ejemplos de las distintas formas de adjuntar código fuente (archivos externos, inline, Makefiles y headers).
+Descomenta `\input{common/anexos}` en `main.tex`. Luego en
+`common/anexos.tex` agrega el `\input{}` del capítulo al que
+pertenece (o directamente el `\chapter{}` si es un anexo general).
+Incluye ejemplos de todas las formas de adjuntar código.
 
 ### ¿Puedo tener código fuente en archivos separados?
 
-Sí, y es la forma recomendada. Crea una carpeta `codigos/` en la raíz y usa `\lstinputlisting`:
+Sí, es la forma recomendada. Crea una carpeta `codigos/` o
+`programa/` y usa `\lstinputlisting` con `\IfFileExists`:
 
 ```latex
-\lstinputlisting[language=C, style=mystyle,
-  caption={Descripción},
-  label={lst:etiqueta}]{codigos/mi_archivo.c}
+\IfFileExists{codigos/mi_archivo.c}{
+  \lstinputlisting[language=C, style=mystyle,
+    caption={Descripción. \propia{}},
+    label={lst:etiqueta}]{codigos/mi_archivo.c}
+}{
+  \noindent\textbf{Nota:} El archivo aún no está disponible.
+}
 ```
 
 El anexo incluido en `common/anexos.tex` documenta todas las variantes.
@@ -327,6 +338,20 @@ El anexo incluido en `common/anexos.tex` documenta todas las variantes.
 ### ¿Por qué XeLaTeX y no pdfLaTeX?
 
 XeLaTeX permite usar cualquier fuente del sistema, maneja Unicode nativamente y es el estándar moderno. Times New Roman con `fontspec` se ve idéntico a `newtxtext`.
+
+### Biber falla con un error críptico
+
+Si `referencias.bib` está vacío y usas `\nocite{*}`, biber falla
+con un error del tipo "No data found" o "Invalid format".
+**Solución**: comenta `\nocite{*}` cuando no tengas referencias,
+o agrega al menos una entrada real en `referencias.bib`.
+
+### latexmk deja referencias como "??"
+
+Algunas configuraciones de `latexmk -pdf` solo ejecutan xelatex
+una vez. Si ves "??" en lugar de números de capítulo o figura,
+usa la receta manual completa (xelatex → biber → xelatex → xelatex)
+descrita en la sección de compilación.
 
 ### No encuentro la fuente Alegreya
 

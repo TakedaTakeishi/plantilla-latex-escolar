@@ -16,7 +16,6 @@
 
 \appendix
 \renewcommand{\appendixname}{Anexo}
-\renewcommand{\appendixpagename}{Anexos}
 \renewcommand{\appendixtocname}{Anexos}
 \addappheadtotoc
 \appendixpage
@@ -40,28 +39,37 @@
 %
 % ==========================================
 %
+% Todas las formas de incluir código deben usar \IfFileExists
+% para evitar errores de compilación si el archivo aún no existe.
+%
+%
 % --- FORMA 1: Desde archivo externo (recomendada) ---
 % Crea una carpeta codigos/ o programa/ en la raíz.
 %
 % \chapter{Código fuente}
 % \label{anexo:codigo}
 %
-% \lstinputlisting[language=C, style=mystyle,
-%   caption={Descripción del código. \propia{}},
-%   label={lst:etiqueta}]{codigos/mi_archivo.c}
-%
-%
-% --- FORMA 2: Con verificación de existencia ---
-% Si el archivo puede no estar presente, usa \IfFileExists
-% para evitar errores de compilación.
-%
-% \IfFileExists{programa/mi_programa.c}{
+% \IfFileExists{codigos/mi_archivo.c}{
 %   \lstinputlisting[language=C, style=mystyle,
-%     caption={Código completo. \propia{}},
-%     label={lst:codigo}]{programa/mi_programa.c}
+%     caption={Descripción del código. \propia{}},
+%     label={lst:etiqueta}]{codigos/mi_archivo.c}
 % }{
 %   \noindent\textbf{Nota:} El archivo aún no está disponible.
 % }
+%
+%
+% --- FORMA 2: Varios archivos en el mismo anexo ---
+%
+% \IfFileExists{programa/coordinador.c}{
+%   \lstinputlisting[language=C, style=mystyle,
+%     caption={Coordinador. \propia{}},
+%     label={lst:coordinador}]{programa/coordinador.c}
+% }{}
+% \IfFileExists{programa/cliente.c}{
+%   \lstinputlisting[language=C, style=mystyle,
+%     caption={Cliente. \propia{}},
+%     label={lst:cliente}]{programa/cliente.c}
+% }{}
 %
 %
 % --- FORMA 3: Código inline (fragmentos pequeños) ---
@@ -76,15 +84,19 @@
 %
 %
 % --- FORMA 4: Makefile ---
-% \lstinputlisting[language=make, style=mystyle,
-%   caption={Makefile del proyecto. \propia{}},
-%   label={lst:makefile}]{codigos/Makefile}
+% \IfFileExists{codigos/Makefile}{
+%   \lstinputlisting[language=make, style=mystyle,
+%     caption={Makefile del proyecto. \propia{}},
+%     label={lst:makefile}]{codigos/Makefile}
+% }{}
 %
 %
 % --- FORMA 5: Archivos de cabecera (.h) ---
-% \lstinputlisting[language=C, style=mystyle,
-%   caption={Archivo de cabecera. \propia{}},
-%   label={lst:header}]{programa/common.h}
+% \IfFileExists{programa/common.h}{
+%   \lstinputlisting[language=C, style=mystyle,
+%     caption={Archivo de cabecera. \propia{}},
+%     label={lst:header}]{programa/common.h}
+% }{}
 %
 %
 % ==========================================

@@ -75,27 +75,66 @@ Crea archivos `.tex` en `capitulos/` y descoméntalos en `main.tex`:
 
 Agrega tus referencias en `referencias.bib` y cítalas con `\cite{clave}`.
 
+## Guía de redacción
+
+La plantilla incluye en `docs/consejos_redaccion.md` una **guía de
+autoevaluación** pensada para ayudarte a mejorar la belleza y
+fluidez de tus textos. Puedes usarla antes de cada entrega para
+revisar tu redacción punto por punto: estructura de párrafos, uso
+de prosa en lugar de viñetas, marcadores textuales, formato de
+figuras, citas en IEEE, etc.
+
+> [!TIP]
+> Antes de cerrar tu documento, ábrela y revisa cada apartado
+> marcando lo que ya cumplas. La forma es tan importante como el
+> fondo: una buena redacción, apoyada en **prosa continua** y en
+> **marcadores textuales** bien elegidos, marca la diferencia entre
+> un trabajo aceptable y uno bien presentado.
+
+La guía incluye, entre otras cosas:
+
+- Reglas generales de redacción (párrafos, viñetas, glosarios).
+- Un **catálogo de marcadores textuales** organizados por intención
+  discursiva (introducir, añadir, ordenar, explicar, contrastar,
+  concluir) para evitar las listas y dar fluidez al texto.
+- Lineamientos específicos para cada sección (portada, resumen,
+  índice, introducción, marco teórico, citas, figuras, tablas,
+  conclusiones).
+- Errores comunes de forma que conviene evitar.
+- Mini-ejemplos concretos para cada punto, facilitando su aplicación.
+
+> [!TIP]
+> Al estar en formato **Markdown (.md)** —el formato estándar para
+> el contexto de asistentes de IA—, puedes copiar el contenido de
+> `docs/consejos_redaccion.md` y usarlo como parte del prompt o
+> contexto de herramientas como ChatGPT, Claude, Gemini, etc. Esto
+> hará que las respuestas de la IA sigan los mismos lineamientos
+> de redacción académica que exige tu documento, ahorrándote tiempo
+> de corrección manual.
+
 ## Estructura del proyecto
 
 ```
 📁 plantilla-latex-escolar/
-├── 📁 .vscode/           → Configuración LaTeX Workshop (no tocar)
-├── 📁 capitulos/         → Portada y tus capítulos (editar aquí)
-│   ├── portada.tex        → Datos del proyecto + diseño
-│   └── ejemplo.tex        → Capítulo de referencia
-├── 📁 common/             → Archivos estáticos (no tocar)
-│   ├── anexos.tex         → Anexos del documento
-│   ├── bibliografia.tex   → Formato bibliográfico
-│   └── indices.tex        → Generación de índices
-├── 📁 config/             → Configuración técnica
-│   ├── proyecto.tex       → Fuente, tamaños (editar)
-│   └── configuracion.tex  → Paquetes y estilos (no tocar)
-├── 📁 imagenes/           → Imágenes del proyecto
-│   └── 📁 logos/          → Logos institucionales
-├── 📁 build/              → Compilación (no se sube)
-├── .gitignore             → Exclusiones de control de versiones
-├── main.tex               → Documento principal
-└── referencias.bib        → Referencias bibliográficas
+├── 📁 .vscode/              → Configuración LaTeX Workshop (no tocar)
+├── 📁 capitulos/            → Portada y tus capítulos (editar aquí)
+│   ├── portada.tex           → Datos del proyecto + diseño
+│   └── ejemplo.tex           → Capítulo de referencia
+├── 📁 common/                → Archivos estáticos (no tocar)
+│   ├── anexos.tex            → Anexos del documento
+│   ├── bibliografia.tex      → Formato bibliográfico
+│   └── indices.tex           → Generación de índices
+├── 📁 config/                → Configuración técnica
+│   ├── proyecto.tex          → Fuente, tamaños (editar)
+│   └── configuracion.tex     → Paquetes y estilos (no tocar)
+├── 📁 docs/                  → Guías y recursos para el autor
+│   └── consejos_redaccion.md → Guía de autoevaluación de redacción
+├── 📁 imagenes/              → Imágenes del proyecto
+│   └── 📁 logos/             → Logos institucionales
+├── 📁 build/                 → Compilación (no se sube)
+├── .gitignore                → Exclusiones de control de versiones
+├── main.tex                  → Documento principal
+└── referencias.bib           → Referencias bibliográficas
 ```
 
 

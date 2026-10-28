@@ -10,7 +10,7 @@
 
 </div>
 
-Plantilla unificada para trabajos académicos en LaTeX compatible con **Alegreya** (XeLaTeX) y **Times New Roman**. Un solo proyecto, dos fuentes, una configuración.
+Plantilla unificada para trabajos académicos en LaTeX compatible con **Alegreya** (XeLaTeX) y **Times New Roman**.
 
 ## Requisitos
 
@@ -306,25 +306,34 @@ La plantilla usa un selector en `config/proyecto.tex` que carga la fuente corres
 
 ### Desde VS Code (recomendado)
 
-Con LaTeX Workshop instalado, la plantilla ya incluye las recetas en `.vscode/settings.json`. Usa:
+Con LaTeX Workshop instalado, la plantilla incluye dos recetas en `.vscode/settings.json`:
 
-- **Compilación rápida** (xelatex simple) — para cambios rápidos
-- **Compilación completa** (xelatex → biber → xelatex → xelatex) — cuando agregas o modificas citas
+| Receta | Qué ejecuta | Cuándo usarla |
+|--------|-------------|---------------|
+| **xelatex (build)** | Una pasada de XeLaTeX, sin Biber | Edición de redacción: es rápida y basta |
+| **xelatex -> biber -> xelatex*2** | Cadena completa con Biber | Al agregar, quitar o cambiar citas o entradas de `referencias.bib` |
+
+> [!IMPORTANT]
+> Al guardar, LaTeX Workshop ejecuta **solo la primera receta** (una pasada).
+> Esa pasada no regenera la bibliografía: si citaste una referencia nueva,
+> verás avisos `Citation 'clave' undefined` y la clave impresa tal cual en el
+> PDF (p. ej. `...inversión de largo plazo arthur2016.`). No es un error del
+> `.tex` ni del `.bib`: falta pasar por Biber.
+>
+> **Solución**: ejecuta una vez la receta completa con `Ctrl+Alt+B`
+> (*Build with recipe*) → **xelatex -> biber -> xelatex*2**. Solo hace falta
+> cuando cambian las citas o el `.bib`, no en cada guardado.
 
 ### Desde terminal
 
 ```bash
-# Compilación rápida (sin bibliografía, una pasada de xelatex)
-latexmk -pdf -outdir=build main.tex
-
-# Receta completa (resuelve referencias cruzadas y bibliografía):
-# Nota: Algunas configuraciones de latexmk solo ejecutan xelatex
-# una vez, lo que deja las referencias como "??". Si pasa eso,
-# usa la receta manual:
-
+# Receta completa (resuelve citas, bibliografía y referencias cruzadas):
 xelatex -output-directory=build main.tex
 biber --output-directory build main
 xelatex -output-directory=build main.tex
+xelatex -output-directory=build main.tex
+
+# Pasada rápida (solo para revisar redacción; no actualiza la bibliografía):
 xelatex -output-directory=build main.tex
 
 # Limpiar compilación
@@ -385,12 +394,26 @@ con un error del tipo "No data found" o "Invalid format".
 **Solución**: comenta `\nocite{*}` cuando no tengas referencias,
 o agrega al menos una entrada real en `referencias.bib`.
 
-### latexmk deja referencias como "??"
+### Veo `Citation 'clave' undefined` al compilar
 
-Algunas configuraciones de `latexmk -pdf` solo ejecutan xelatex
-una vez. Si ves "??" en lugar de números de capítulo o figura,
-usa la receta manual completa (xelatex → biber → xelatex → xelatex)
-descrita en la sección de compilación.
+La bibliografía está desactualizada: la receta rápida (una pasada) no
+regenera `main.bbl`, así que las referencias nuevas no existen todavía para
+el documento. Ejecuta una vez la receta completa
+(xelatex → biber → xelatex → xelatex) y los avisos desaparecen.
+Detalles en la sección [Compilación](#compilación).
+
+### latexmk da errores de fuentes o referencias en "??"
+
+`latexmk -pdf` compila con **pdfLaTeX**, no con XeLaTeX: `fontspec` no
+carga, las fuentes personalizadas (Alegreya, Times New Roman) fallan y el
+documento sale roto, con referencias en `??` incluidas. No es que latexmk
+no soporte fuentes personalizadas —es el motor equivocado—. Si quieres
+usar latexmk, invócalo con el motor correcto:
+`latexmk -xelatex -outdir=build main.tex`.
+
+En Windows, algunos antivirus (incluido Defender) marcan el Perl de
+TeX Live que latexmk necesita; en ese caso usa la receta manual completa
+de la sección [Compilación](#compilación).
 
 ### No encuentro la fuente Alegreya
 
